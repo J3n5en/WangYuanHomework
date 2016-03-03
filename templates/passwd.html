@@ -1,0 +1,38 @@
+{% load staticfiles %}
+{% include "head.html" %}
+<span class="mdl-layout-title">跟換手機號碼</span>
+{% include 'nav.html' %}
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+        <!-- 一个单元格÷ -->
+          <div style="margin-top: 35px;" class="demo-cards mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-grid mdl-grid--no-spacing">
+            <div id="cell"  class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--12-col-tablet mdl-cell--12-col-desktop">
+                <div style="min-height: 280px;background-position:center; background-image: url('{% static 'images/bg.jpg' %}'); " class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                  <h2 class="mdl-card__title-text">{{ message }}</h2>
+                </div>
+                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                  <form id="changephone" action="" method="post" style="max-width: 300px;margin: 0 auto">
+                      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                        <input name="newphone" class="mdl-textfield__input" type="text" pattern="^0?(13[0-9]|15[012356789]|18[0236789]|14[57]|170)[0-9]{8}$" id="sample4" />
+                        <label class="mdl-textfield__label" for="sample4">新手機號...</label>
+                        <span class="mdl-textfield__error">你輸入的並不是手機號碼!</span>
+                      </div>
+                    </form>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a onclick="$('#changephone').submit();" style="float: right;" href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect" >提交修改</a>
+                </div>
+            </div>
+          </div>
+        <!-- 一个单元格end -->
+        </div>
+      </main>
+    </div>
+
+
+{#    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.14/vue.min.js"></script>#}
+<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+<script src="{% static 'material.min.js' %}"></script>
+{#    <script src="{% static 'homework.js' %}"></script>#}
+  </body>
+</html>

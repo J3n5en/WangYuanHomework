@@ -1,0 +1,72 @@
+{% load staticfiles %}
+{% include "head.html" %}
+<span class="mdl-layout-title">{{ title }}</span>
+{% include 'nav.html' %}
+      <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid demo-content">
+        <!-- 一个单元格÷ -->
+        {% for homework in homeworks %}
+          <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
+            <div id="cell"  class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
+                <div style="background-image: url('{% static 'images/dog.png' %}');" class="mdl-card__title mdl-card--expand mdl-color--teal-300">
+                  <h2 class="mdl-card__title-text">{{ homework.owner }}</h2>
+                </div>
+                <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                  {{ homework.desc }}
+                </div>
+                <div id="comment" v-transition="expand1" class="expand-enter mdl-card__supporting-text mdl-color-text--grey-600" style="border-top: 1px solid rgba(0,0,0,.1);">
+                    {{ homework.comment }}
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                  <a href="/media/{{ homework.link }}" class="mdl-button mdl-js-button mdl-js-ripple-effect">下载查看</a>
+                  <a id="showcomment" onclick="changeArea(this);" style="float: right;" href="#" class="mdl-button mdl-js-button mdl-js-ripple-effect" >顯示評論</a>
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+        <!-- 一个单元格end -->
+        </div>
+        <a v-on="click:showaddform" target="_blank" id="view-source" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-color--accent mdl-color-text--accent-contrast">提交最新作品</a>
+      </main>
+    </div>
+
+
+
+<div v-on="click:hiddenform" v-show="showadd" v-transition="expand1" style="display:none;width:100%;height: 100%;background:rgba(0,0,0,0.5);position: absolute;top: 0px;left: 0px;z-index:998;"></div>
+    <div v-show="showadd" class="demo-card-wide mdl-card mdl-shadow--2dp center" style="display:none;z-index: 999;">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">發佈新作品 ~</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <form action="{{ url }}" method="post" enctype="multipart/form-data" id="subform" >
+        <div class="mdl-textfield mdl-js-textfield">
+            <textarea class="mdl-textfield__input" type="text" rows= "3" id="sample5" name="desc"></textarea>
+            <label class="mdl-textfield__label" for="sample5">作品描述</label>
+        </div>
+      <a id="filebtn" onclick="document.getElementById('fileup').click();" style="width:300px;text-align: center; float: left;" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          上傳文檔
+      </a>
+        <input id="fileup" v-on="change:fileup" name="link" type="file" style="opacity:0;">
+    </form>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    {% if errormsg %}
+    <a id="errormsg" style="float: left;" onclick="document.getElementById('sample5').focus();" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      {{ errormsg }}
+    </a>
+      {% endif %}
+    <a id="submitform" style="float: right;" onclick="document.getElementById('subform').submit();document.getElementById('submitform').innerHTML = '正在上傳...';" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      提交
+    </a>
+  </div>
+  <div class="mdl-card__menu">
+  </div>
+</div>
+
+{#    <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/0.12.14/vue.min.js"></script>#}
+<script src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="{% static 'vue.js' %}"></script>
+    <script src="{% static 'codeindex.js' %}"></script>
+    <script src="{% static 'material.min.js' %}"></script>
+  </body>
+</html>

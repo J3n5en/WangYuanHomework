@@ -1,0 +1,99 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>网园新生作品展览中心</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-precomposed.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+{#    <link href="{% static 'css.css' %}" rel="stylesheet">#}
+{#    <link href="{% static 'css1.css' %}" rel="stylesheet">#}
+    <link rel="stylesheet" href="{% static 'material.min.css' %}">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+<style>
+body{
+    background: #fff url("{% static 'images/bg.jpg' %}") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.demo-card-wide.mdl-card {
+  width: 450px;
+}
+#subform{
+    margin-left: 50px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url("{% static 'images/welcome_card.jpg' %}") center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+.center{
+  position:absolute;
+  top: 50%;
+  margin-top: -250px;
+  left: 50%;
+  margin-left: -225px;
+}
+</style>
+  </head>
+  <body>
+    <!-- Wide card with share menu button -->
+
+
+<div class="demo-card-wide mdl-card mdl-shadow--2dp center">
+  <div class="mdl-card__title">
+    <h2 class="mdl-card__title-text">Welcome ~</h2>
+  </div>
+  <div class="mdl-card__supporting-text">
+    <form action="{% url 'index' %}" id="subform" method="post">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" pattern="([\u4E00-\u9FFF]+)(·?[\u4E00-\u9FFF]*)" name="username" id="name" />
+        <label class="mdl-textfield__label" for="name">姓名...</label>
+      </div>
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" name="phone" id="phone" />
+        <label class="mdl-textfield__label" for="phone">手機號...</label>
+      </div>
+    </form>
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+    {% if errormsg %}
+    <a style="float: left;" onclick="document.getElementById('name').focus();" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      {{ errormsg }}
+    </a>
+      {% endif %}
+    <a style="float: right;" onclick="document.getElementById('subform').submit();" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+      登錄
+    </a>
+  </div>
+  <div class="mdl-card__menu">
+  </div>
+</div>
+    <script src="{% static 'material.min.js' %}"></script>
+  </body>
+</html>
